@@ -1,11 +1,243 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Heart Disease Prediction</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+    body {
+        background-attachment: fixed; 
+        background-size: cover;
+        color: rgba(224, 22, 22, 0.582);
+        font-family: Segoe UI;
+        font-size: 14pt;
+        text-align: center;
+        vertical-align: middle
+    }
+    form {
+        text-align: right;
+        vertical-align: middle        
+    } 
+    input{
+        border-radius: 4pt;
+        border-width: 2pt;
+        border-color: rgb(0, 0, 0);  
+    }
+    button{
+        background-color: aliceblue;
+        color: darkslategray;
+        border: 2px;
+        border-color: lightsteelblue;
+        border-radius: 5px;} 
+    </style> 
 </head>
-<body>
+<body background="https://oldschoolgrappling.com/wp-content/uploads/2018/08/Background-opera-speeddials-community-web-simple-backgrounds.jpg">
+        <h1 style="letter-spacing: 1pt" >Name: {{user.upper()}}</h1>
+        <h3 style="letter-spacing: 1pt;">Please input medical information</h3>
+        <fieldset>
+        <form action="http://localhost:5000/predict" method="POST">
+
+            <!-- Name -->
+            <div class="form-group row">
+                <label for="user" class="col-sm-5 col-form-label">Name: </label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="text" name="user" id="user" value="{{user}}" placeholder="{{user}}" readonly>
+                </div>
+            </div>
+
+            <!-- Age -->
+            <div class="form-group row">
+                <label for="age" class="col-sm-5 col-form-label">Age: </label>
+                <div class="col-sm-2">
+                    <input name="age" class="form-control" type="number" min="0" placeholder=" ... years old" required/>
+                </div>
+            </div>
+            
+            <!-- Sex -->
+            <div class="form-group row">
+                <label for="sex" class="col-sm-5 col-form-label">Sex: </label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="sex" id="sex" value="0" required>
+                    <label class="form-check-label" for="sex">Female</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="sex" id="sex" value="1">
+                    <label class="form-check-label" for="sex">Male</label>
+                </div>
+            </div>
+            
+            <!-- CP -->
+            <div class="form-group row">
+                <label for="cp" class="col-sm-5 col-form-label">Chest Pain Type: </label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="cp" id="cp" value="0" required>
+                    <label class="form-check-label" for="cp">Typical Angina</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="cp" id="cp" value="1">
+                    <label class="form-check-label" for="cp">Atypical Angina</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="cp" id="cp" value="2">
+                    <label class="form-check-label" for="cp">Non-Anginal Pain</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="cp" id="cp" value="3">
+                    <label class="form-check-label" for="cp">Asymptotic</label>
+                </div>
+            </div>
+
+            <!-- trestbps -->
+            <div class="form-group row">
+                <label for="trestbps" class="col-sm-5 col-form-label">Resting Blood Pressure: </label>
+                <div class="col-sm-2">
+                    <input name="trestbps" class="form-control" type="number" min="0" placeholder=" ... mmHg" required/>
+                </div>
+            </div>
+
+            <!-- chol -->
+            <div class="form-group row">
+                <label for="chol" class="col-sm-5 col-form-label">Serum Cholestrol: </label>
+                <div class="col-sm-2">
+                    <input name="chol" class="form-control" type="number" min="0" placeholder=" ... mmHg" required/>
+                </div>
+            </div>
+
+            <!-- fbs -->
+            <div class="form-group row">
+                <label for="fbs" class="col-sm-5 col-form-label">Fasting Blood Sugar: </label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="fbs" id="fbs" value="0" required>
+                    <label class="form-check-label" for="fbs">MORE than 120mg/dl</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="fbs" id="fbs" value="1">
+                    <label class="form-check-label" for="fbs">LESS than 120mg/dl</label>
+                </div>
+            </div>
+
+            <!-- restecg -->
+            <div class="form-group row">
+                <label for="restecg" class="col-sm-5 col-form-label">Resting ECG (Electrocardiographic): </label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="restecg" id="restecg" value="0" required>
+                    <label class="form-check-label" for="restecg">Normal</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="restecg" id="restecg" value="1">
+                    <label class="form-check-label" for="restecg">Having ST-T Wave Abnormality</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="restecg" id="restecg" value="2">
+                    <label class="form-check-label" for="restecg">Left Ventricular Hyperthrophy</label>
+                </div>
+            </div>
+
+            <!-- thalach -->
+            <div class="form-group row">
+                <label for="thalach" class="col-sm-5 col-form-label">Max Heart Rate: </label>
+                <div class="col-sm-2">
+                    <input name="thalach" class="form-control" type="number" min="0" placeholder=" ... bps" required/>
+                </div>
+            </div>
+
+            <!-- exang -->
+            <div class="form-group row">
+                <label for="exang" class="col-sm-5 col-form-label">Exercise Induced Angina: </label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="exang" id="exang" value="1" required>
+                    <label class="form-check-label" for="exang">Yes</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="exang" id="exang" value="0">
+                    <label class="form-check-label" for="exang">No</label>
+                </div>
+            </div>
+
+            <!-- oldpeak -->
+            <div class="form-group row">
+                <label for="oldpeak" class="col-sm-5 col-form-label">ST Depression Induced by Exercise Relative to Rest: </label>
+                <div class="col-sm-2">
+                    <input name="oldpeak" class="form-control" type="number" step="0.1" min="0" placeholder=" ratio" required/>
+                </div>
+            </div>
+
+            <!-- slope -->
+            <div class="form-group row">
+                <label for="slope" class="col-sm-5 col-form-label">Peak Exercise ST Segment: </label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="slope" id="slope" value="0" required>
+                    <label class="form-check-label" for="slope">Upsloping</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="slope" id="slope" value="1">
+                    <label class="form-check-label" for="slope">Flat</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="slope" id="slope" value="2">
+                    <label class="form-check-label" for="slope">Downsloping</label>
+                </div>
+            </div>
+
+            <!-- ca -->
+            <div class="form-group row">
+                <label for="ca" class="col-sm-5 col-form-label">Number of Major Vessels colored by Flourosopy: </label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ca" id="ca" value="0" required>
+                    <label class="form-check-label" for="ca">0</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ca" id="ca" value="1">
+                    <label class="form-check-label" for="ca">1</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ca" id="ca" value="2">
+                    <label class="form-check-label" for="ca">2</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ca" id="ca" value="3">
+                    <label class="form-check-label" for="ca">3</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="ca" id="ca" value="4">
+                    <label class="form-check-label" for="ca">4</label>
+                </div>
+            </div>
+
+            <!-- thal -->
+            <div class="form-group row">
+                <label for="thal" class="col-sm-5 col-form-label">Number of Major Vessels colored by Flourosopy: </label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="thal" id="thal" value="1" required>
+                    <label class="form-check-label" for="thal">Normal</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="thal" id="thal" value="2">
+                    <label class="form-check-label" for="thal">Fixed Defect</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="thal" id="thal" value="3">
+                    <label class="form-check-label" for="thal">Reversible Defect</label>
+                </div>
+            </div>
+
+            <!-- Button -->
+            <div class="form-group row">
+                <div class="col-sm-5">
+                    <input type="Submit" value="Predict" class="btn btn-success"/>
+                </div>
+                <div class="col-sm-1">
+                    <input type="Reset" value="Reset" class="btn btn-danger"/>
+                </div>
+                <div class="col-sm-1">
+                    <a href="http://localhost:5000/"><input type="Button" value="Home" class="btn btn-secondary"/></a>
+                </div>
+            </div>
+
+        </form>
+    </fieldset>
     
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>
