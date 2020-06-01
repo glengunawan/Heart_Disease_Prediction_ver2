@@ -31,7 +31,8 @@
     </style> 
 </head>
 <body background="https://oldschoolgrappling.com/wp-content/uploads/2018/08/Background-opera-speeddials-community-web-simple-backgrounds.jpg">
-        <h1 style="letter-spacing: 1pt" >Name: {{user.upper()}}</h1>
+        <h1 style="letter-spacing: 1pt" >Name: {{patient.nama.upper()}}</h1>
+        <h1 style="letter-spacing: 1pt" >ID: {{patient.id.upper()}}</h1>
         <h3 style="letter-spacing: 1pt;">Please input medical information</h3>
         <fieldset>
         <form action="http://localhost:5000/predict" method="POST">
@@ -40,7 +41,7 @@
             <div class="form-group row">
                 <label for="user" class="col-sm-5 col-form-label">Name: </label>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="text" name="user" id="user" value="{{user}}" placeholder="{{user}}" readonly>
+                    <input class="form-check-input" type="text" name="user" id="user" value=" {{patient.nama.capitalize()}}" placeholder="{{user}}" readonly>
                 </div>
             </div>
 

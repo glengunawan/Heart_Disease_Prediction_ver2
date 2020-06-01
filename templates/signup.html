@@ -30,17 +30,17 @@
     </style> 
 </head>
 <body background="https://oldschoolgrappling.com/wp-content/uploads/2018/08/Background-opera-speeddials-community-web-simple-backgrounds.jpg">
-    <h1 style="letter-spacing: 1pt" >CREATING NEW ACCOUNT</h1>
+    <h1 style="letter-spacing: 1pt" >REGISTERING NEW PATIENT</h1>
     <br>
     <form action="http://localhost:5000/signup" method="POST"> 
         <div>
-            <label for="username" style="font-size: large; color: black" >Your Username: </label>
-            <input type="text"  name='username' placeholder="Username (No Space)" size="35" id="username" pattern="[a-zA-Z0-9]{0,16}" title="No Space" autocomplete="off" required>
+            <label for="name" style="font-size: large; color: black" >Patient Name: </label>
+            <input type="text"  name='name' placeholder="Patient Name" size="35" id="name" autocomplete="off" required>
         </div>
         <br>
         <div>
-            <label for="password" style="font-size: large; color: black" >Your Password: </label>
-            <input type="password"  name='password' placeholder="Password" size="35" id="password" pattern="[a-zA-Z0-9]{,12}" maxlength="30" autocomplete="off" required>
+            <label for="id" style="font-size: large; color: black" >Patient ID: </label>
+            <input type="id"  name='id' placeholder="Patient ID" size="35" id="id"  maxlength="30" autocomplete="off" required>
         </div>
         <br>
         <div>

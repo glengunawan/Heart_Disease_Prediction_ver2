@@ -30,7 +30,11 @@
     </style> 
 </head>
 <body background="https://oldschoolgrappling.com/wp-content/uploads/2018/08/Background-opera-speeddials-community-web-simple-backgrounds.jpg">
-    <h1 style="letter-spacing: 1pt" >HASIL PREDIKSI!</h1>
+    <h1 style="letter-spacing: 1pt" >PREDICTIION RESULT!</h1>
+    <br>
+    <h3 style="letter-spacing: 1pt" >Patient Name: {{data['name']}}</h1>
+    <br>
+    <h3 style="letter-spacing: 1pt" >Patient ID: {{data['id']}}</h1>
     <br>
     {% if data['prediction']|int == 1 %}
     <img src="{{url_for('static', filename='heart_disease.jpg')}}" width="490px" height="330px">
@@ -41,10 +45,10 @@
     <br><br>
 
     {% if data['prediction']|int == 1 %}
-    <h5 style="letter-spacing: 1pt" >Prediksi : MEMILIKI Masalah Jantung</h1>
+    <h5 style="letter-spacing: 1pt" >Prediction : HAVE a Heart Disease</h1>
     {% endif %}
     {% if data['prediction']|int == 0 %}
-    <h5 style="letter-spacing: 1pt" >Prediksi : TIDAK MEMILIKI Masalah Jantung</h1>
+    <h5 style="letter-spacing: 1pt" >Prediksi : DON'T HAVE a Heart Disease</h1>
     {% endif %}
     <br>   
 
@@ -54,8 +58,12 @@
         <label for="signup" style="font-size: large; color: black" ><b>Go Back to Login Page</b></label><br>
         <a href="http://localhost:5000/"><input type="Button" value="Home" class="btn btn-primary"/></a>
     </div>
+    <br> 
+    <div>
+        <label for="history" style="font-size: large; color: black" ><b>Check Patient History</b></label><br>
+        <a href="http://localhost:5000/history"><input type="Button" value="Check History" class="btn btn-secondary"/></a>
+    </div>
     
-
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

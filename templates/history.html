@@ -26,19 +26,39 @@
         color: darkslategray;
         border: 2px;
         border-color: lightsteelblue;
-        border-radius: 5px;} 
+        border-radius: 5px;
+    }
+    .dataframe{ 
+        text-align: center;
+        vertical-align: center;
+        color: rgb(0, 0, 0);
+        display: inline-block
+    } 
+    table.center {
+    margin-left:auto; 
+    margin-right:auto;
+  }
     </style> 
 </head>
 <body background="https://oldschoolgrappling.com/wp-content/uploads/2018/08/Background-opera-speeddials-community-web-simple-backgrounds.jpg">
-    <h1 style="letter-spacing: 1pt" >REGISTER FAILED!</h1>
+    <h1 style="letter-spacing: 1pt" >PREDICTIION RESULT!</h1>
     <br>
-    <h5 style="letter-spacing: 1pt" >Pasien ID already registered, please proceed to login</h1>
-    <br>   
+    <h3 style="letter-spacing: 1pt" >Patient Name: {{pasien[0]['name']}}</h1>
+    <br>
+    <h3 style="letter-spacing: 1pt" >Patient ID: {{pasien[0]['id']}}</h1>
+    <br>
+    <div class= "dataframe">
+    {% for table in tables %}
+    {{titles[loop.index]}}
+    {{ table|safe }}
+    {% endfor %}
+    </div>
+    <br>  
     <div>
-        <label for="signup" style="font-size: large; color: black" ><b>Go Back to Home Page</b></label><br>
+        <label for="signup" style="font-size: large; color: black" ><b>Go Back to Login Page</b></label><br>
         <a href="http://localhost:5000/"><input type="Button" value="Home" class="btn btn-primary"/></a>
     </div>
-    
+    <br>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
