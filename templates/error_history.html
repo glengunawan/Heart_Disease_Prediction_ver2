@@ -30,24 +30,22 @@
     </style> 
 </head>
 <body background="https://oldschoolgrappling.com/wp-content/uploads/2018/08/Background-opera-speeddials-community-web-simple-backgrounds.jpg">
-    <h1 style="letter-spacing: 1pt" >REGISTERING NEW PATIENT</h1>
+    <h1 style="letter-spacing: 1pt" >Nama Pasien atau ID SALAH!</h1>
     <br>
-    <form action="http://localhost:5000/signup" method="POST"> 
-        <div>
-            <label for="name" style="font-size: large; color: black" >Patient Name: </label>
-            <input type="text"  name='name' placeholder="Patient Name" size="35" id="name" autocomplete="off" required>
-        </div>
-        <br>
-        <div>
-            <label for="id" style="font-size: large; color: black" >Patient ID: </label>
-            <input type="text"  name='id' placeholder="Patient ID" size="35" id="id"  maxlength="30" autocomplete="off" required>
-        </div>
-        <br>
-        <div>
-            <input type="submit" value="Register" class="btn btn-success">
-            <a href="http://localhost:5000/"><input type="Button" value="Home" class="btn btn-primary"/></a>
-        </div>
-    </form>
+    <h5 style="letter-spacing: 1pt" >Perhatikan Apakah Nama Pasien dan ID sudah benar</h1>
+    <br> 
+    
+    <div>
+        <label for="signup" style="font-size: large; color: black" ><b>Go Back to Check History Page</b></label><br>
+        <a href="http://localhost:5000/history"><input type="Button" value="Check History" class="btn btn-secondary"/></a>
+    </div>
+
+    <div>
+        <label for="signup" style="font-size: large; color: black" ><b>Go Back to Login Page</b></label><br>
+        <a href="http://localhost:5000/"><input type="Button" value="Home" class="btn btn-primary"/></a>
+    </div>
+      
+    
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

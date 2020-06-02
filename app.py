@@ -5,6 +5,7 @@ import mysql.connector
 import requests
 from tensorflow import keras 
 from sklearn.preprocessing import MinMaxScaler
+from pickle import load
 
 dbku = mysql.connector.connect( 
     host = 'localhost', 
@@ -112,26 +113,31 @@ def predict():
     ca = int(body['ca'])
     thal = int(body['thal']) 
 
-    list_data = [age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak, slope, ca, thal]
+    list_data = [[age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak, slope, ca, thal]]
     dfData = pd.DataFrame(list_data)
+    print(dfData)
 
     # Ambil ID
     tuple_name = (name,)
+    # print(tuple_name)
     x = dbku.cursor(dictionary=True) 
     query = 'select patientID from PatientList where name = %s' 
     x.execute(query, tuple_name) 
     id_pasien = list(x)
+    # print(id_pasien)
     id_pasien = id_pasien[0]['patientID']
     
     # Data Normalization and Preprocessing
-    scaler = MinMaxScaler() 
-    data_scale = scaler.fit_transform(dfData) 
+    scaler = load(open('scaler.pkl', 'rb'))
+    data_scale = scaler.transform(dfData) 
     list_data_scale = list(data_scale) 
+    print(list_data_scale)
     
     list_tampung = []
-    for i in list_data_scale: 
-        list_tampung.append(i[0])
+    for i in list_data_scale[0]: 
+        list_tampung.append(i)
     dfData_scale = pd.DataFrame([list_tampung])
+    print(dfData_scale)
 
     # Model Prediction 
     model = keras.models.load_model('./model2/trained_heart_model.h5')
@@ -169,20 +175,42 @@ def predict():
 
     return render_template('prediction.html', data=dict_data)
 
-@app.route('/history')
+@app.route('/history', methods=['GET', 'POST'])
 def history():  
-    # Ambil ID
-    tuple_id = (12345,)
-    x = dbku.cursor(dictionary=True) 
-    query = 'select * from listData3 where id = %s' 
-    x.execute(query, tuple_id) 
-    data_pasien = list(x)
-    data = pd.DataFrame(data_pasien)
+    
+    if request.method == 'GET':
+        return render_template('login_history.html') 
+    elif request.method == 'POST': 
+        nama_pasien = request.form['name'].upper()
+        id_pasien = request.form['id']
+        data_pasien = {'nama': nama_pasien, 'id': id_pasien}
 
-    print(data)
+        tuple_id = (id_pasien,)
+        x = dbku.cursor(dictionary=True) 
+        query = 'select * from listData3 where id = %s' 
+        x.execute(query, tuple_id) 
+        data_pasien = list(x)
+        data = pd.DataFrame(data_pasien)
 
-    return render_template('history.html',  tables=[data.to_html()], titles=data.columns.values, pasien = data_pasien)
+        # print(data)
 
+        x = dbku.cursor(dictionary=True) 
+        query = 'select * from PatientList' 
+        x.execute(query) 
+
+        tampungPasien = list(x) 
+        listNama = []  
+        listID = []  
+
+        for i in tampungPasien: 
+            listNama.append(i['name'])
+            listID.append(i['patientID'])
+
+
+        if nama_pasien in listNama and id_pasien == listID[listNama.index(nama_pasien)]:
+            return render_template('history.html',  tables=[data.to_html()], titles=data.columns.values, pasien = data_pasien)
+        else:
+            return render_template('error_history.html')
 
 if __name__ == '__main__': 
     app.run(debug=True)

@@ -30,21 +30,26 @@
     </style> 
 </head>
 <body background="https://oldschoolgrappling.com/wp-content/uploads/2018/08/Background-opera-speeddials-community-web-simple-backgrounds.jpg">
-    <h1 style="letter-spacing: 1pt" >REGISTERING NEW PATIENT</h1>
+    <h1 style="letter-spacing: 1pt" >CHECK YOUR HISTORY</h1>
     <br>
-    <form action="http://localhost:5000/signup" method="POST"> 
+    <form action="http://localhost:5000/history" method="POST"> 
         <div>
-            <label for="name" style="font-size: large; color: black" >Patient Name: </label>
-            <input type="text"  name='name' placeholder="Patient Name" size="35" id="name" autocomplete="off" required>
+            <label style="font-size: large; color: black" ><b>Type Patient's Name and ID</b></label><br>
+        </div>
+        <div>
+            <input type="text"  name='name' placeholder="Nama" size="35" autocomplete="off">
         </div>
         <br>
         <div>
-            <label for="id" style="font-size: large; color: black" >Patient ID: </label>
-            <input type="text"  name='id' placeholder="Patient ID" size="35" id="id"  maxlength="30" autocomplete="off" required>
+            <input type="text"  name='id' placeholder="Patient ID" size="35" autocomplete="off">
         </div>
         <br>
         <div>
-            <input type="submit" value="Register" class="btn btn-success">
+            <input type="submit" value="Check History" class="btn btn-success">
+        </div>
+        <br>
+        <div>
+            <label for="signup" style="font-size: large; color: black" ><b>Go Back Home</b></label><br>
             <a href="http://localhost:5000/"><input type="Button" value="Home" class="btn btn-primary"/></a>
         </div>
     </form>
